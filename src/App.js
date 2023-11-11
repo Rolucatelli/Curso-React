@@ -27,6 +27,7 @@ function HomeScreen({navigation}) {
             marginTop: 18,
           }}
           placeholder="Nome"
+          placeholderTextColor={0x333333}
         />
         <TouchableOpacity
           style={{

@@ -54,3 +54,33 @@ export const TextButton = styled.Text`
   color: #72bfe8;
   font-size: 10px;
 `;
+
+export const ContainerModal = styled.View`
+  flex: 1;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextModal = styled.Text`
+  color: #000000;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 14px;
+`;
+
+export const InputModal = styled.TextInput`
+  width: 80%;
+  height: 47px;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-size: 18px;
+`;
+
+export const TextModalButton = styled.Text`
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+`;
