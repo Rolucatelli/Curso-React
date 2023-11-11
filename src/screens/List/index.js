@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, {useState} from 'react';
+import {FlatList} from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 import {
   Container,
   Title,
@@ -12,28 +14,34 @@ import {
   ContainerCheckList,
   TextInputTask,
 } from './styles';
-import Plus from "../../assets/PlusWhite";
+import Plus from '../../assets/PlusWhite';
 
-const List = ({navigation}) => {
+const List = ({route}) => {
+  const {listData} = route.params;
+
+  const [checkBox, setCheckBox] = useState(false);
+
   return (
     <Container>
       <ContainerTitle>
         <Title>$NOME List Segunda</Title>
-        <SubTitle>%d de %d tarefas</SubTitle>
+        <SubTitle>{listData.tasks.filter((tasks) => tasks.lida).length} de {listData.tasks.length} tarefas</SubTitle>
         <Line />
       </ContainerTitle>
-      <ContainerList>
-        <ContainerCheckList />
-        <TextTask>Curso React Native</TextTask>
-      </ContainerList>
-      <ContainerList>
-        <ContainerCheckList />
-        <TextTask>Curso React Native</TextTask>
-      </ContainerList>
-
+      <FlatList
+        data={listData.tasks}
+        renderItem={({item}) => (
+          <ContainerList>
+            <CheckBox value={item.lida} onValueChange={setCheckBox} />
+            <TextTask>{item.titleTask}</TextTask>
+          </ContainerList>
+        )}
+      />
       <ContainerTask>
-        <TextInputTask placeholder='Tarefa' placeholderTextColor={0x333333}/>
-        <Button><Plus/></Button>
+        <TextInputTask placeholder="Tarefa" placeholderTextColor={0x333333} />
+        <Button>
+          <Plus />
+        </Button>
       </ContainerTask>
     </Container>
   );
