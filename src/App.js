@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -6,6 +6,9 @@ import HomePage from './screens/HomePage/index';
 import List from './screens/List/index';
 
 function HomeScreen({navigation}) {
+  const [nameApp, setNameApp] = useState('');
+  console.log(nameApp);
+
   return (
     <View
       style={{
@@ -25,9 +28,11 @@ function HomeScreen({navigation}) {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: 18,
+            color: '#000000',
           }}
           placeholder="Nome"
           placeholderTextColor={0x333333}
+          onChangeText={text => setNameApp(text)}
         />
         <TouchableOpacity
           style={{
@@ -39,7 +44,7 @@ function HomeScreen({navigation}) {
             marginTop: 18,
           }}
           onPress={() => {
-            navigation.navigate('HomePage');
+            navigation.navigate('HomePage', nameApp);
           }}>
           <Text style={{color: '#ffffff', fontSize: 24}}>Criar!</Text>
         </TouchableOpacity>

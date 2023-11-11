@@ -13,11 +13,13 @@ import {
   InputModal,
   ContainerModal,
   TextModalButton,
+  Separator
 } from './styles';
 import Plus from '../../assets/Plus.svg';
 import {Modal, TouchableOpacity, View} from 'react-native';
+import ListTasks from '../../components/ListTasks';
 
-const HomePage = ({navigation}) => {
+const HomePage = ({navigation, route}) => {
   const [modal, setModal] = useState(false);
   const [modalButton, setModalButton] = useState('#000000');
 
@@ -59,7 +61,7 @@ const HomePage = ({navigation}) => {
           setModal(!modal);
         }}>
         <ContainerModal>
-          <TextModal>Criar Lista do $NOME</TextModal>
+          <TextModal>Criar Lista do {route.params}</TextModal>
           <InputModal
             placeholder="Nome da Lista"
             placeholderTextColor={0x333333}
@@ -83,7 +85,7 @@ const HomePage = ({navigation}) => {
         <ContainerTitle>
           <Line />
           <ContainerText>
-            <Title>$NOME </Title>
+            <Title>{route.params} </Title>
             <SubTitle>List</SubTitle>
           </ContainerText>
           <Line />
@@ -97,6 +99,8 @@ const HomePage = ({navigation}) => {
           </Button>
           <TextButton>Adicionar a lista</TextButton>
         </ContainerButton>
+        <Separator/>
+        <ListTasks />
       </Container>
     </>
   );

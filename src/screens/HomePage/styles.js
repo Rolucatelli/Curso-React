@@ -84,3 +84,7 @@ export const TextModalButton = styled.Text`
   font-weight: bold;
   text-align: center;
 `;
+
+export const Separator = styled.View`
+  margin-top: 74px;
+`;
