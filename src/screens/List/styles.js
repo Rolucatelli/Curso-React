@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
+
 export const Container = styled.View`
   flex: 1;
   background-color: #ffffff;
@@ -7,6 +8,7 @@ export const Container = styled.View`
 
 export const ContainerTitle = styled.View`
   margin-left: 40px;
+  margin-top: 20px;
 `;
 
 export const Title = styled.Text`
@@ -25,7 +27,6 @@ export const Line = styled.View`
   margin-top: 8px;
   width: 100%;
   height: 1px;
-  background-color: #72bfe8;
 `;
 
 export const ContainerList = styled.View`
@@ -58,7 +59,6 @@ export const ContainerTask = styled.View`
 export const Button = styled.TouchableOpacity`
   width: 48px;
   height: 48px;
-  background-color: #72bfe8;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
@@ -75,12 +75,21 @@ export const TextInputTask = styled.TextInput`
 `;
 
 export const ButtonDelete = styled.TouchableOpacity`
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   background-color: #d85963;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
   margin-right: 10px;
   margin-left: auto;
+`;
+
+export const ButtonReturn = styled.TouchableOpacity`
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin: 10px auto 0px 10px;
 `;

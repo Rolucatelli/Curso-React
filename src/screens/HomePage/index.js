@@ -77,14 +77,19 @@ const HomePage = ({navigation, route}) => {
           setModal(!modal);
         }}>
         <ContainerModal>
-          <TextModal>Criar Lista do {user}</TextModal>
+          <TextModal>Criar uma {user}'s <SubTitle>List</SubTitle></TextModal>
           <InputModal
             placeholder="Nome da Lista"
             placeholderTextColor={0x333333}
             onChangeText={text => setNameList(text)}
           />
           <View style={{flexDirection: 'row'}}>{renderButtonColor()}</View>
-
+          <InputModal
+            placeholder="Cor personalizada. Ex: #000"
+            placeholderTextColor={0x333333}
+            onChangeText={text => setModalButton(text)}
+            marginBottom={10}
+          />
           <TouchableOpacity
             style={{
               width: '80%',

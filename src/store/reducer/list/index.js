@@ -19,6 +19,9 @@ const listSlice = createSlice({
       };
       state.data.push(newItem);
     },
+    setDataDeleteList(state, action) {
+      state.data = state.data.filter(item => item.id !== action.payload.id);
+    },
     setDataAddTask(state, action) {
       const listItem = state.data.find(item => item.id === action.payload.id);
       if (listItem) {
@@ -66,5 +69,6 @@ export const {
   setDataDeleteTask,
   setDataMarkTask,
   setDataAddTask,
+  setDataDeleteList,
 } = listSlice.actions;
 export default listSlice.reducer;

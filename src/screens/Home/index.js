@@ -58,7 +58,7 @@ function Home({navigation}) {
           onPress={() => {
             handlerButton();
           }}>
-          <Text style={{color: '#ffffff', fontSize: 24}}>Criar!</Text>
+          <Text style={{color: '#ffffff', fontSize: 24}}>Entrar</Text>
         </TouchableOpacity>
       </View>
     </View>

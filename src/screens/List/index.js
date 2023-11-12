@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {
   Container,
@@ -13,11 +13,16 @@ import {
   TextTask,
   ButtonDelete,
   TextInputTask,
+  ButtonReturn,
 } from './styles';
 import Plus from '../../assets/PlusWhite';
+import Cross from '../../assets/Cross';
+import LeftArrow from '../../assets/arrow-left';
+import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 
 const List = ({route}) => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const {listData} = route.params;
 
@@ -28,6 +33,10 @@ const List = ({route}) => {
   const [listTask, setListTask] = useState(
     list.find(item => item.id === listData.id),
   );
+
+  const handlerBackButton = () => {
+    navigation.navigate('HomePage');
+  };
 
   const handlerCreateTask = (listId, taskId) => {
     if (nameListTask) {
@@ -68,6 +77,13 @@ const List = ({route}) => {
 
   return (
     <Container>
+      <ButtonReturn
+        onPress={() => handlerBackButton()}
+        style={{
+          backgroundColor: listTask.color,
+        }}>
+        <LeftArrow />
+      </ButtonReturn>
       <ContainerTitle>
         <Title>
           {user}'s List: {listTask.name}
@@ -76,7 +92,11 @@ const List = ({route}) => {
           {listTask.tasks.filter(task => task.lida).length} de{' '}
           {listTask.tasks.length} tarefas
         </SubTitle>
-        <Line />
+        <Line
+          style={{
+            backgroundColor: listTask.color,
+          }}
+        />
       </ContainerTitle>
       <FlatList
         data={listTask.tasks}
@@ -90,18 +110,22 @@ const List = ({route}) => {
             <TextTask>{item.titleTask}</TextTask>
             <ButtonDelete
               onPress={() => handlerDeleteTask(listData.id, item.id)}>
-              <Plus />
+              <Cross />
             </ButtonDelete>
           </ContainerList>
         )}
       />
       <ContainerTask>
         <TextInputTask
-          placeholder="Tarefa"
+          placeholder="Digite uma tarefa"
           placeholderTextColor={0x333333}
           onChangeText={text => setNameListTask(text)}
         />
-        <Button onPress={text => handlerCreateTask(text)}>
+        <Button
+          onPress={text => handlerCreateTask(text)}
+          style={{
+            backgroundColor: listTask.color,
+          }}>
           <Plus />
         </Button>
       </ContainerTask>

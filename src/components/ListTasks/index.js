@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, FlatList, TouchableOpacity} from 'react-native';
-import {TaskNumber, SubTitle, Title} from './styles';
+import {TaskNumber, SubTitle, Title, ButtonDelete} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+import CrossBlack from '../../assets/CrossBlack';
 
 const ListTasks = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const list = useSelector(state => state.list.data);
 
@@ -21,6 +23,15 @@ const ListTasks = () => {
         <SubTitle>Concluídas</SubTitle>
       </>
     );
+  };
+
+  const handlerDeleteList = id => {
+    dispatch({
+      type: 'LIST/setDataDeleteList',
+      payload: {
+        id: id,
+      },
+    });
   };
 
   const handlePress = item => {
@@ -46,6 +57,9 @@ const ListTasks = () => {
             onPress={() => handlePress(item)}>
             <Title>{item.name}</Title>
             {renderTasksCounts(item.tasks)}
+            <ButtonDelete onPress={() => handlerDeleteList(item.id)}>
+              <CrossBlack />
+            </ButtonDelete>
           </TouchableOpacity>
         )}
       />

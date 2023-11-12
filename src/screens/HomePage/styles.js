@@ -12,6 +12,7 @@ export const Container = styled.View`
 `;
 
 export const ContainerText = styled.View`
+  
   flex-direction: row;
   
 `;
@@ -20,7 +21,7 @@ export const ContainerTitle = styled.View`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 100px;
+  margin-top: 125px;
   margin-bottom: 55px;
 `;
 
@@ -38,6 +39,7 @@ export const Line = styled.View`
 
 export const ContainerButton = styled.View`
   align-items: center;
+  margin: 30px 0px 40px 0px;
 `;
 
 export const Button = styled.TouchableOpacity`
