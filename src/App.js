@@ -4,66 +4,26 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomePage from './screens/HomePage/index';
 import List from './screens/List/index';
-
-function HomeScreen({navigation}) {
-  const [nameApp, setNameApp] = useState('');
-  console.log(nameApp);
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: '#72bfe8',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <Text style={{color: '#FFFFFF', fontSize: 32, fontWeight: 'bold'}}>
-        Escreva Seu Nome:
-      </Text>
-      <View style={{width: '70%'}}>
-        <TextInput
-          style={{
-            borderRadius: 8,
-            backgroundColor: '#ffffff',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: 18,
-            color: '#000000',
-          }}
-          placeholder="Nome"
-          placeholderTextColor={0x333333}
-          onChangeText={text => setNameApp(text)}
-        />
-        <TouchableOpacity
-          style={{
-            height: 47,
-            borderRadius: 8,
-            backgroundColor: '#96D897',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: 18,
-          }}
-          onPress={() => {
-            navigation.navigate('HomePage', nameApp);
-          }}>
-          <Text style={{color: '#ffffff', fontSize: 24}}>Criar!</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-}
+import Home from './screens/Home';
+import {Provider} from 'react-redux';
+import {store, persistor} from './store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="HomePage" component={HomePage} />
-        <Stack.Screen name="List" component={List} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="HomePage" component={HomePage} />
+            <Stack.Screen name="List" component={List} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 };
 

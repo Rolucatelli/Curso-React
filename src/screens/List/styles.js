@@ -73,3 +73,14 @@ export const TextInputTask = styled.TextInput`
   border: 1px solid #000000;
   margin: 0px 16px 0px 16px;
 `;
+
+export const ButtonDelete = styled.TouchableOpacity`
+  width: 30px;
+  height: 30px;
+  background-color: #d85963;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-right: 10px;
+  margin-left: auto;
+`;

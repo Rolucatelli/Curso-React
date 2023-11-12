@@ -13,15 +13,21 @@ import {
   InputModal,
   ContainerModal,
   TextModalButton,
-  Separator
+  Separator,
 } from './styles';
 import Plus from '../../assets/Plus.svg';
 import {Modal, TouchableOpacity, View} from 'react-native';
 import ListTasks from '../../components/ListTasks';
+import {useSelector, useDispatch} from 'react-redux';
 
 const HomePage = ({navigation, route}) => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
+  const [nameList, setNameList] = useState('');
   const [modalButton, setModalButton] = useState('#000000');
+
+  const user = useSelector(state => state.user.data.name);
+  const list = useSelector(state => state.list.data);
 
   colorButton = [
     '#5CD859',
@@ -51,6 +57,16 @@ const HomePage = ({navigation, route}) => {
     });
   };
 
+  const handlerModal = () => {
+    if (nameList && modalButton) {
+      dispatch({
+        type: 'LIST/setDataList',
+        payload: {name: nameList, color: modalButton},
+      });
+      setModal(false);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -61,10 +77,11 @@ const HomePage = ({navigation, route}) => {
           setModal(!modal);
         }}>
         <ContainerModal>
-          <TextModal>Criar Lista do {route.params}</TextModal>
+          <TextModal>Criar Lista do {user}</TextModal>
           <InputModal
             placeholder="Nome da Lista"
             placeholderTextColor={0x333333}
+            onChangeText={text => setNameList(text)}
           />
           <View style={{flexDirection: 'row'}}>{renderButtonColor()}</View>
 
@@ -76,7 +93,7 @@ const HomePage = ({navigation, route}) => {
               borderRadius: 8,
               justifyContent: 'center',
             }}
-            onPress={() => setModal(false)}>
+            onPress={() => handlerModal()}>
             <TextModalButton>Criar!</TextModalButton>
           </TouchableOpacity>
         </ContainerModal>
@@ -85,7 +102,7 @@ const HomePage = ({navigation, route}) => {
         <ContainerTitle>
           <Line />
           <ContainerText>
-            <Title>{route.params} </Title>
+            <Title>{user}'s </Title>
             <SubTitle>List</SubTitle>
           </ContainerText>
           <Line />
@@ -99,7 +116,7 @@ const HomePage = ({navigation, route}) => {
           </Button>
           <TextButton>Adicionar a lista</TextButton>
         </ContainerButton>
-        <Separator/>
+        <Separator />
         <ListTasks />
       </Container>
     </>
